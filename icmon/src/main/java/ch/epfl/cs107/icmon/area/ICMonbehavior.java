@@ -26,6 +26,8 @@ public class ICMonbehavior extends AreaBehavior {
         }
     }
 
+    //Defines all kinds of movement for the game
+
     public enum AllowedWalkingType {
         NONE, // None
         SURF, // Only with surf
@@ -45,7 +47,9 @@ public class ICMonbehavior extends AreaBehavior {
         WATER(-16776961, AllowedWalkingType.SURF),
         GRASS(-16743680, AllowedWalkingType.FEET);
 
+        /** Type of Cell */
         final int type;
+        /** Allowed movement in the cell */
         final AllowedWalkingType walkingType;
 
         /**
@@ -100,13 +104,17 @@ public class ICMonbehavior extends AreaBehavior {
 
         @Override
         protected boolean canEnter(Interactable entity) {
+            //Can't enter the cell if there is an entity that occupies it
             if(entity.takeCellSpace()){
+                //Searches for an entity in the Cell wich occupies it
                 for(Interactable e : this.entities){
                     if(e.takeCellSpace()) return false;
                     else return true;
                 }
             }
+            //Can't enter if the Cell doesn't allow to be walked on by feet or surf
             if(getWalkingType() == AllowedWalkingType.NONE) return false;
+            //Can enter if the Cell allows to be walked on by feet or surf
             return true;
         }
 

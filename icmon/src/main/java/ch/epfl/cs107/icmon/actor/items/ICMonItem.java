@@ -11,7 +11,7 @@ public abstract class ICMonItem extends CollectableAreaEntity {
 
     //Area where the ICMonItem will exist
     protected Area owner;
-
+    //Position of the Item in the Area
     private DiscreteCoordinates position;
     //Reference for image
     protected final Sprite sprite;

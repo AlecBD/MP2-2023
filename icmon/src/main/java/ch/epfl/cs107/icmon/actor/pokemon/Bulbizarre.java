@@ -1,7 +1,5 @@
 package ch.epfl.cs107.icmon.actor.pokemon;
 
-import javax.crypto.AEADBadTagException;
-
 import ch.epfl.cs107.icmon.actor.handler.ICMonInteractionVisitor;
 import ch.epfl.cs107.icmon.actor.pokemon.actions.Attack;
 import ch.epfl.cs107.icmon.actor.pokemon.actions.RunAway;

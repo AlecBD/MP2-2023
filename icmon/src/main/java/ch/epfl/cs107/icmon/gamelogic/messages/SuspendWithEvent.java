@@ -1,6 +1,5 @@
 package ch.epfl.cs107.icmon.gamelogic.messages;
 
-import ch.epfl.cs107.icmon.actor.ICMonActor;
 import ch.epfl.cs107.icmon.gamelogic.events.PokemonFightEvent;
 
 public class SuspendWithEvent extends GamePlayMessage {

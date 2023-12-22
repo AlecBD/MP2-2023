@@ -17,11 +17,12 @@ Pour des intéractions:
     
     Pendant une bataille (fight):
         SPACE: commencer la bataille
-        LEFT/RIGHT: choisir si ataquer ou fuir
+        LEFT/RIGHT: choisir si ataquer ou fuir (attaquer à gauche et fuir à droite)
         ENTER: confirmer le choix
         SPACE: sortir de la bataille (une fois celle-là terminée)
 
 R: recommencer le jeu
+(ne marche bien que si le joueur n'est pas dans un combat)
 
 #Comment ramasser une pokeball
 Se placer face à la pokeball et intéragir avec cele-là

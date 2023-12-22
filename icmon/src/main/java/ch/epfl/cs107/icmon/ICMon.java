@@ -12,7 +12,6 @@ import ch.epfl.cs107.icmon.area.maps.Arena;
 import ch.epfl.cs107.icmon.area.maps.Lab;
 import ch.epfl.cs107.icmon.area.maps.Town;
 import ch.epfl.cs107.icmon.gamelogic.actions.LogAction;
-//import ch.epfl.cs107.icmon.gamelogic.actions.PauseGameAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.RegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.RegisterInAreaAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.ResumeEventAction;
@@ -23,14 +22,12 @@ import ch.epfl.cs107.icmon.gamelogic.actions.UnRegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.events.CollectItemEvent;
 import ch.epfl.cs107.icmon.gamelogic.events.EndOfGameEvent;
 import ch.epfl.cs107.icmon.gamelogic.events.ICMonEvent;
-import ch.epfl.cs107.icmon.gamelogic.events.PokemonFightEvent;
 import ch.epfl.cs107.icmon.gamelogic.fights.ICMonFight;
 import ch.epfl.cs107.icmon.gamelogic.messages.GamePlayMessage;
 import ch.epfl.cs107.icmon.gamelogic.messages.SuspendWithEvent;
 import ch.epfl.cs107.play.areagame.AreaGame;
 import ch.epfl.cs107.play.areagame.actor.Interactable;
 import ch.epfl.cs107.play.areagame.area.Area;
-import ch.epfl.cs107.play.engine.PauseMenu;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Orientation;
@@ -41,12 +38,8 @@ public class ICMon extends AreaGame {
 
     /** ??? */
     public final static float CAMERA_SCALE_FACTOR = 13.f;
-    /** ??? */
-    private final String[] areas = {"town","town"};
-    /** ??? */
+    /** Player */
     private ICMonPlayer player;
-    /** ??? */
-    private int areaIndex;
     /** ??? */
     private ICBall ball;
     /** ??? */
@@ -75,8 +68,7 @@ public class ICMon extends AreaGame {
     public boolean begin(Window window, FileSystem fileSystem){
         if(super.begin(window, fileSystem)){
             createAreas();
-            areaIndex = 0;
-            initArea(areas[areaIndex]);
+            initArea("town");
             ball = new ICBall(getCurrentArea(), ((ICMonArea)getCurrentArea()).getBallSpawnPosition(), "items/icball");
             ICMonEvent ballCollection = new CollectItemEvent(ball, player);
             ballCollection.onStart(new RegisterEventAction(EVENT_MANAGER, ballCollection));

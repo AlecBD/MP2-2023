@@ -10,7 +10,6 @@ import ch.epfl.cs107.icmon.actor.pokemon.Nidoqueen;
 import ch.epfl.cs107.icmon.actor.pokemon.Pokemon;
 import ch.epfl.cs107.icmon.area.ICMonbehavior.AllowedWalkingType;
 import ch.epfl.cs107.icmon.area.ICMonbehavior.ICMonCell;
-import ch.epfl.cs107.icmon.gamelogic.actions.RegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.messages.PassDoorMessage;
 import ch.epfl.cs107.play.areagame.actor.Interactable;
 import ch.epfl.cs107.play.areagame.actor.Interactor;
@@ -34,25 +33,25 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
 
     /** ??? */
     private final static int ANIMATION_DURATION = 8;
-    /** ??? */
+    /** Animation of Movement */
     private static OrientedAnimation moveAnimation;
-    /** ??? */
+    /** Used to know if moving by feet or surf */
     private static String spriteName;
-    /** ??? */
+    /** Kind of movement (feet or surf) */
     private AllowedWalkingType walkingType = AllowedWalkingType.FEET;
-    /** ??? */
+    /** Defines if Player is moving */
     private boolean moving = false;
     /** ??? */
     private final ICMonPlayerHandler handler = new ICMonPlayerHandler();
-    /** ??? */
+    /** Collection of Pokeballs */
     private static List<ICBall> balls = new ArrayList<ICBall>();
     /** ??? */
     private final ICMonGameState state;
-    /** ??? */
+    /** Defines if Player is currently in a Dialog */
     private boolean inDialog = false;
-    /** ??? */
+    /** Collection of Pokemon */
     private ArrayList<Pokemon> pokemon = new ArrayList<>();
-    /** ??? */
+    /** Defines if Player is currently fighting */
     private boolean isFighting;
 
     /**
@@ -217,15 +216,16 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
 
     private class ICMonPlayerHandler implements ICMonInteractionVisitor {
 
+        //Redefines kind of movement when entering a Cell that only accepts the other kind of movement
         @Override
         public void interactWith(ICMonCell cell, boolean isCellInteraction){
             if(isCellInteraction){
                 if(cell.getWalkingType() == AllowedWalkingType.FEET && spriteName.equals("actors/player_water")){
                     spriteName = "actors/player";
-                    ICMonPlayer.moveAnimation = new OrientedAnimation("actors/player", ICMonPlayer.this.ANIMATION_DURATION / 2, getOrientation(), ICMonPlayer.this);
+                    ICMonPlayer.moveAnimation = new OrientedAnimation("actors/player", ANIMATION_DURATION / 2, getOrientation(), ICMonPlayer.this);
                 } else if(cell.getWalkingType() == AllowedWalkingType.SURF  && spriteName.equals("actors/player")){
                     spriteName = "actors/player_water";
-                    ICMonPlayer.moveAnimation = new OrientedAnimation("actors/player_water", ICMonPlayer.this.ANIMATION_DURATION / 2, getOrientation(), ICMonPlayer.this);
+                    ICMonPlayer.moveAnimation = new OrientedAnimation("actors/player_water", ANIMATION_DURATION / 2, getOrientation(), ICMonPlayer.this);
                 }
             }
         }

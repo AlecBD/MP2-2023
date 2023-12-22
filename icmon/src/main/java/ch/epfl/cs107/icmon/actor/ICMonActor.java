@@ -17,17 +17,14 @@ public abstract class ICMonActor extends MovableAreaEntity {
     /**
      * Default ICMonActor Constructor 
      * 
-     * @param owner ???
-     * @param orientation ???
-     * @param coordinates ???
+     * @param owner (Area): Area of spawn. Not null
+     * @param orientation (Orientation): Orientation on spawn. Not null
+     * @param coordinates (DiscreteCoordinates): Coordinates at spawn
      */
     public ICMonActor(Area owner, Orientation orientation, DiscreteCoordinates coordinates){
         super(owner, orientation, coordinates);
     }
     
-    /**
-     * ???
-     */
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -46,7 +43,8 @@ public abstract class ICMonActor extends MovableAreaEntity {
     }
 
     /**
-     * ???
+     * Enter an area at a certain position
+     * 
      * @param area     (Area): initial area, not null
      * @param position (DiscreteCoordinates): initial position, not null
      */
@@ -69,8 +67,9 @@ public abstract class ICMonActor extends MovableAreaEntity {
     }
 
     /**
-     * ???
-     * @param text ???
+     * Sets a new Dialog
+     * 
+     * @param text (String): text int Diaalog
      */
     public void openDialog(String text){
         dialog = new Dialog(text);
@@ -78,7 +77,8 @@ public abstract class ICMonActor extends MovableAreaEntity {
 
     /**
      * Needed for ICMonFight but can't use getOwnerArea because it is protected
-     * @return ???
+     * 
+     * @return (Area): getOwnerArea()
      */
     public Area getICMonOwnerArea(){
         return super.getOwnerArea();

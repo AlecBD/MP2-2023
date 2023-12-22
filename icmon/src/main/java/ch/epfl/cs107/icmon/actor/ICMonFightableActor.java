@@ -6,8 +6,6 @@ import ch.epfl.cs107.icmon.gamelogic.actions.LeaveAreaAction;
 import ch.epfl.cs107.icmon.gamelogic.events.PokemonFightEvent;
 import ch.epfl.cs107.icmon.gamelogic.fights.ICMonFight;
 import ch.epfl.cs107.icmon.gamelogic.messages.SuspendWithEvent;
-import ch.epfl.cs107.play.window.Canvas;
-import ch.epfl.cs107.play.window.Window;
 
 public interface ICMonFightableActor {
 

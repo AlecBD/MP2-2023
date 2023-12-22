@@ -36,7 +36,7 @@ public abstract class Area implements Playable, PauseMenu.Pausable {
     /// List of Actors inside the area
     private List<Actor> actors;
     /// List of Actors we want to register/unregistered from the area for next update iteration
-    private List<Actor> registeredActors = new ArrayList<Actor>();
+    private List<Actor> registeredActors;
     private List<Actor> unregisteredActors;
     /// Sublist of actor (interactors) inside the area
     private List<Interactor> interactors;

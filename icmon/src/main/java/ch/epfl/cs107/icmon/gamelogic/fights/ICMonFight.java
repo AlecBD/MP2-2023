@@ -9,7 +9,6 @@ import ch.epfl.cs107.play.engine.PauseMenu;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
-import ch.epfl.cs107.play.window.Window;
 
 public class ICMonFight extends PauseMenu {
 
@@ -17,8 +16,6 @@ public class ICMonFight extends PauseMenu {
     private Pokemon player;
     /** ??? */
     private Pokemon opponent;
-    /** ??? */
-    private float counter = 5f;
     /** ??? */
     private ICMonFightArenaGraphics arena;
     /** ??? */
@@ -45,12 +42,12 @@ public class ICMonFight extends PauseMenu {
 
         arena = new ICMonFightArenaGraphics(CAMERA_SCALE_FACTOR , player.properties(), opponent.properties());
         keyboard = player.getICMonOwnerArea().getKeyboard();
+        selectionMenu = new ICMonFightActionSelectionGraphics(CAMERA_SCALE_FACTOR, keyboard, player.properties().actions());
     }
 
     @Override
     public void update(float deltaTime){
         super.update(deltaTime);
-        selectionMenu = new ICMonFightActionSelectionGraphics(CAMERA_SCALE_FACTOR, keyboard, player.properties().actions());
         Button space = keyboard.get(Keyboard.SPACE);
         switch(state){
             case INTRODUCTION:
@@ -60,6 +57,7 @@ public class ICMonFight extends PauseMenu {
                 selectionMenu.update(deltaTime);
                 if(selectionMenu.choice() != null){
                     action = selectionMenu.choice();
+                    selectionMenu = new ICMonFightActionSelectionGraphics(CAMERA_SCALE_FACTOR, keyboard, player.properties().actions());
                     state = FightState.ACTIONEXECUTION;
                 }
                 break;
@@ -125,13 +123,12 @@ public class ICMonFight extends PauseMenu {
     }
 
     private enum FightState {
-        INTRODUCTION(0, "Welcome to the fight"),
-        ACTIONSELECTION(1, null),
-        OPPONENTACTION(1, null),
-        ACTIONEXECUTION(3, null),
-        CONCLUSION(4, "Good fight !");
+        INTRODUCTION("Welcome to the fight"),
+        ACTIONSELECTION(null),
+        OPPONENTACTION(null),
+        ACTIONEXECUTION(null),
+        CONCLUSION("Good fight !");
 
-        final int type;
         String text;
 
         /**
@@ -139,8 +136,7 @@ public class ICMonFight extends PauseMenu {
          * @param type
          * @param text
          */
-        private FightState(int type, String text){
-            this.type = type;
+        private FightState(String text){
             this.text = text;
         }
 
