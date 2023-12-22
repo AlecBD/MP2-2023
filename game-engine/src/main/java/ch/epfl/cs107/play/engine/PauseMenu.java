@@ -21,7 +21,7 @@ public abstract class PauseMenu implements Playable, Acoustics{
     private Pausable owner;
     /// Display dimension scale
     /// Context objects
-    protected Window window;
+    private Window window;
     //private FileSystem fileSystem; // TODO link it to save concept
 
     protected static final float CAMERA_SCALE_FACTOR = 13;

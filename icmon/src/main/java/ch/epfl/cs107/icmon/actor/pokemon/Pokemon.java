@@ -1,10 +1,12 @@
 package ch.epfl.cs107.icmon.actor.pokemon;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.icmon.actor.ICMonActor;
 import ch.epfl.cs107.icmon.actor.ICMonFightableActor;
+import ch.epfl.cs107.icmon.gamelogic.fights.ICMonFightAction;
 import ch.epfl.cs107.play.areagame.area.Area;
 import ch.epfl.cs107.play.engine.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -28,6 +30,8 @@ public abstract class Pokemon extends ICMonActor implements  ICMonFightableActor
     private int damage;
     /** ??? */
     private boolean alive = true;
+    /** ??? */
+    protected List<ICMonFightAction> actions = new ArrayList<>();
 
     /**
      * Pokemon Constructor
@@ -110,6 +114,14 @@ public abstract class Pokemon extends ICMonActor implements  ICMonFightableActor
 
         public int damage(){
             return Pokemon.this.damage;
+        }
+
+        public boolean isAlive(){
+            return Pokemon.this.alive;
+        }
+
+        public List<ICMonFightAction> actions() {
+            return Pokemon.this.actions;
         }
 
     }

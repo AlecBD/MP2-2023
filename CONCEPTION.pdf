@@ -10,3 +10,5 @@ Added method addBall to ICMonPlayer to call it from CollectItemEvent
 changed visibility from method setPauseMenu(pauseMenu) to public to use it for action PauseGameAction
 
 changed visibility from window in PauseMenu to protected to use it in ICMonFight
+
+changed visibility from getOwnerArea() in AreaEntity to public to use it in ICMonFight

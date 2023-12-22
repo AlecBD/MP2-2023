@@ -1,6 +1,10 @@
 package ch.epfl.cs107.icmon.actor.pokemon;
 
+import javax.crypto.AEADBadTagException;
+
 import ch.epfl.cs107.icmon.actor.handler.ICMonInteractionVisitor;
+import ch.epfl.cs107.icmon.actor.pokemon.actions.Attack;
+import ch.epfl.cs107.icmon.actor.pokemon.actions.RunAway;
 import ch.epfl.cs107.play.areagame.area.Area;
 import ch.epfl.cs107.play.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -17,6 +21,8 @@ public class Bulbizarre extends Pokemon {
      */
     public Bulbizarre(Area owner, Orientation orientation, DiscreteCoordinates coordinates){
         super(owner, orientation, coordinates, "bulbizarre", 1, 10);
+        actions.add(new Attack());
+        actions.add(new RunAway());
     }
 
     /**

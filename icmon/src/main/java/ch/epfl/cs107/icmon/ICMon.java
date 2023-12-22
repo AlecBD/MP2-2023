@@ -24,6 +24,7 @@ import ch.epfl.cs107.icmon.gamelogic.events.CollectItemEvent;
 import ch.epfl.cs107.icmon.gamelogic.events.EndOfGameEvent;
 import ch.epfl.cs107.icmon.gamelogic.events.ICMonEvent;
 import ch.epfl.cs107.icmon.gamelogic.events.PokemonFightEvent;
+import ch.epfl.cs107.icmon.gamelogic.fights.ICMonFight;
 import ch.epfl.cs107.icmon.gamelogic.messages.GamePlayMessage;
 import ch.epfl.cs107.icmon.gamelogic.messages.SuspendWithEvent;
 import ch.epfl.cs107.play.areagame.AreaGame;
@@ -129,6 +130,9 @@ public class ICMon extends AreaGame {
                     ((SuspendWithEvent)message).getEvent().onStart(new SuspendEventAction(event));
                     ((SuspendWithEvent)message).getEvent().onComplete(new ResumeEventAction(event));
                 }
+
+                setPauseMenu((ICMonFight)((SuspendWithEvent)message).getEvent().getPauseMenu());
+                requestPause();
                 
             }
             message.process();
@@ -188,10 +192,6 @@ public class ICMon extends AreaGame {
 
         public Area setCurrentArea(String areaKey, boolean forceBegin){
             return ICMon.this.setCurrentArea(areaKey, forceBegin);
-        }
-
-        public Window getWindow(){
-            return ICMon.this.getWindow();
         }
 
         /**

@@ -20,8 +20,6 @@ public class PokemonFightEvent extends ICMonEvent {
         if(isStarted() && !isCompleted()){
             fight.update(deltaTime);
             if(!fight.isRunning()) complete();
-
-            fight.drawMenu(fight.getWindow());
         }
     }
 }
