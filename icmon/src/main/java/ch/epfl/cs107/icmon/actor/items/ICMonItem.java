@@ -44,28 +44,16 @@ public abstract class ICMonItem extends CollectableAreaEntity {
 
     }
 
-    /**
-     * non-transversable
-     * @return ???
-     */
     @Override
     public boolean takeCellSpace(){
         return true;
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
      public boolean isCellInteractable(){
         return true;
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean isViewInteractable(){
         return false;

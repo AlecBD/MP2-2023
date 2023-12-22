@@ -10,6 +10,11 @@ public class UnRegisterEventAction implements Action {
     /** ??? */
     private ICMonEvent event;
 
+    /**
+     * 
+     * @param handler
+     * @param event
+     */
     public UnRegisterEventAction(ICMonEventManager handler, ICMonEvent event){
         this.handler = handler;
         this.event = event;
@@ -20,5 +25,4 @@ public class UnRegisterEventAction implements Action {
         if(event.isCompleted()) handler.completeEvent(event);
         else handler.deActivateEvent(event);
     }
-    
 }

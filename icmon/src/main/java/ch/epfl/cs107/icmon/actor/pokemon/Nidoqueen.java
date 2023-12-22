@@ -19,11 +19,6 @@ public class Nidoqueen extends Pokemon {
         super(owner, orientation, coordinates, "nidoqueen", 1, 10);
     }
 
-    /**
-     * 
-     * @param v
-     * @param isCellInteraction
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

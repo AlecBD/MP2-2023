@@ -10,10 +10,18 @@ public class SuspendWithEvent extends GamePlayMessage {
     /** ??? */
     private final static String text = "suspension des événements en cours à cause d'un événement combat";
 
+    /**
+     * 
+     * @param event
+     */
     public SuspendWithEvent(PokemonFightEvent event){
         this.event = event;
     }
 
+    /**
+     * 
+     * @return
+     */
     public PokemonFightEvent getEvent() {
         return event;
     }

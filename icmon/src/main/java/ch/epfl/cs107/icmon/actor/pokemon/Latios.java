@@ -19,11 +19,6 @@ public class Latios extends Pokemon {
         super(owner, orientation, coordinates, "latios", 1, 10);
     }
 
-    /**
-     * 
-     * @param v
-     * @param isCellInteraction
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

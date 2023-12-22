@@ -25,11 +25,6 @@ public class Bulbizarre extends Pokemon {
         actions.add(new RunAway());
     }
 
-    /**
-     * 
-     * @param v
-     * @param isCellInteraction
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

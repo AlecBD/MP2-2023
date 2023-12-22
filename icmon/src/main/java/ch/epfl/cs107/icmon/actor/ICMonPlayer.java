@@ -34,7 +34,6 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
 
     /** ??? */
     private final static int ANIMATION_DURATION = 8;
-
     /** ??? */
     private static OrientedAnimation moveAnimation;
     /** ??? */
@@ -74,10 +73,6 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
         addPokemon(new Nidoqueen(owner, orientation, coordinates));
     }
 
-    /**
-     * ???
-     * @param deltaTime elapsed time since last update, in seconds, non-negative
-     */
     @Override
     public void update(float deltaTime) {
         Keyboard keyboard = getOwnerArea().getKeyboard();
@@ -102,10 +97,6 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
         super.update(deltaTime);
     }
 
-    /**
-     * ???
-     * @param canvas target, not null
-     */
     @Override
     public void draw(Canvas canvas) {
         moveAnimation.draw(canvas);
@@ -114,55 +105,31 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
         }
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean takeCellSpace() {
         return true;
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean isCellInteractable() {
         return true;
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean isViewInteractable() {
         return !inDialog;
     }
 
-    /**
-     * ???
-     */
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
-    /**
-     * 
-     * @return ???
-     */
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells(){
         return Collections.singletonList(getCurrentMainCellCoordinates().jump(getOrientation().toVector()));
     }
 
-    /**
-     * ???
-     * @param v (AreaInteractionVisitor) : the visitor
-     * @param isCellInteraction ???
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);
@@ -192,19 +159,11 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
         getOwnerArea().setViewCandidate(this);
     }
 
-    /**
-     * 
-     * @return
-     */
     @Override
     public boolean wantsCellInteraction(){
         return true;
     }
 
-    /**
-     * 
-     * @return
-     */
     @Override
     public boolean wantsViewInteraction(){
         Keyboard keyboard = getOwnerArea().getKeyboard();
@@ -219,11 +178,6 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
         return walkingType;
     }
 
-    /**
-     * ???
-     * @param other ???
-     * @param isCellInteraction ???
-     */
     @Override
     public void interactWith(Interactable other , boolean isCellInteraction) {
         other.acceptInteraction(handler , isCellInteraction);
@@ -251,6 +205,11 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
         balls.add(ball);
     }
 
+    /**
+     * Adds a new Pokemon to the collection of the Player
+     * 
+     * @param pokemon (Pokemon) Not null
+     */
     public void addPokemon(Pokemon pokemon){
         this.pokemon.add(pokemon);
     }
@@ -258,11 +217,6 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
 
     private class ICMonPlayerHandler implements ICMonInteractionVisitor {
 
-        /**
-         * ???
-         * @param cell ???
-         * @param isCellInteraction ???
-         */
         @Override
         public void interactWith(ICMonCell cell, boolean isCellInteraction){
             if(isCellInteraction){
@@ -276,20 +230,10 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
             }
         }
 
-        /**
-         * ???
-         * @param player ???
-         * @param isCellInteraction ???
-         */
         @Override
         public void interactWith(ICMonPlayer player, boolean isCellInteraction) {
         }
 
-        /**
-         * ???
-         * @param ball ???
-         * @param isCellInteraction ???
-         */
         @Override
         public void interactWith(ICBall ball, boolean isCellInteraction) {
             if(!isCellInteraction && getOwnerArea().getKeyboard().get(Keyboard.L).isDown() && !ICMonPlayer.this.inDialog){
@@ -298,22 +242,12 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
             
         }
 
-        /**
-         * ???
-         * @param player ???
-         * @param isCellInteraction ???
-         */
         @Override
         public void interactWith(ICShopAssistant assistant, boolean isCellInteraction) {
             if(!isCellInteraction && getOwnerArea().getKeyboard().get(Keyboard.L).isDown() && !ICMonPlayer.this.inDialog)
             ICMonPlayer.this.state.acceptInteraction(assistant, isCellInteraction);
         }
 
-        /**
-         * ???
-         * @param door ???
-         * @param isCellInteraction ???
-         */
         @Override
         public void interactWith(Door door, boolean isCellInteraction) {
             if (isCellInteraction){
@@ -322,20 +256,12 @@ public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFi
             }
         }
 
-        /**
-         * ???
-         * @param pokemon ???
-         * @param isCellInteraction ???
-         */
         @Override
         public void interactWith(Pokemon pokemon, boolean isCellInteraction) {
             if (isCellInteraction && !ICMonPlayer.this.isFighting){
                 fight(ICMonPlayer.this.pokemon.get(0), pokemon, state);
             }
         }
-
-
-
     }
 
 }

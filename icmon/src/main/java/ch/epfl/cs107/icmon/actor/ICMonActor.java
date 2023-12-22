@@ -33,10 +33,6 @@ public abstract class ICMonActor extends MovableAreaEntity {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean takeCellSpace() {
         return false;
@@ -62,19 +58,11 @@ public abstract class ICMonActor extends MovableAreaEntity {
         resetMotion();
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean isCellInteractable() {
         return true;
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean isViewInteractable() {
         return false;
@@ -88,6 +76,10 @@ public abstract class ICMonActor extends MovableAreaEntity {
         dialog = new Dialog(text);
     }
 
+    /**
+     * Needed for ICMonFight but can't use getOwnerArea because it is protected
+     * @return ???
+     */
     public Area getICMonOwnerArea(){
         return super.getOwnerArea();
     }

@@ -21,10 +21,6 @@ public class CollectItemEvent extends ICMonEvent {
         this.item = item;
     }
 
-    /**
-     * ???
-     * @param deltaTime elapsed time since last update, in seconds, non-negative
-     */
     @Override
     public void update(float deltaTime) {
         if(item.isCollected()){
@@ -33,12 +29,14 @@ public class CollectItemEvent extends ICMonEvent {
         }
     }
 
+    @Override
     public void interactWith(ICBall ball , boolean isCellInteraction){
         player.addBall(ball);;
         ball.getCollected();
         System.out.println("Player is interacting with Ball");
     }
 
+    @Override
     public void interactWith(ICShopAssistant assistant, boolean isCellInteractable){
         if(isStarted()){
             System.out.println("This is an interaction between the player and ICShopAssistant based on events !");

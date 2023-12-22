@@ -7,6 +7,10 @@ public class StartEventAction implements Action {
     /** ??? */
     private ICMonEvent event;
 
+    /**
+     * 
+     * @param event
+     */
     public StartEventAction(ICMonEvent event){
         this.event = event;
     }

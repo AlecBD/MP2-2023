@@ -71,12 +71,6 @@ public class ICMon extends AreaGame {
         addArea(new Arena());
     }
 
-    /**
-     * ???
-     * @param window (Window): display context. Not null
-     * @param fileSystem (FileSystem): given file system. Not null
-     * @return ???
-     */
     @Override
     public boolean begin(Window window, FileSystem fileSystem){
         if(super.begin(window, fileSystem)){
@@ -104,10 +98,6 @@ public class ICMon extends AreaGame {
         return false;
     }
 
-    /**
-     * ???
-     * @param deltaTime elapsed time since last update, in seconds, non-negative
-     */
     @Override
     public void update(float deltaTime){
         super.update(deltaTime);
@@ -141,18 +131,10 @@ public class ICMon extends AreaGame {
         }
     }
 
-    /**
-     * ???
-     */
     @Override
     public void end(){
-
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public String getTitle(){ return "ICMon";}
 
@@ -178,23 +160,34 @@ public class ICMon extends AreaGame {
 
     }
 
-    /* public PauseMenu setPauseMenu(PauseMenu menu){
-        return super.setPauseMenu(menu);
-    } */
-
     public class ICMonGameState {
 
         private ICMonGameState(){}
 
+        /**
+         * 
+         * @param interactable
+         * @param isCellInteraction
+         */
         public void acceptInteraction(Interactable interactable , boolean isCellInteraction){
             for(var event : ICMon.this.events)
             interactable.acceptInteraction(event , isCellInteraction);
         }
 
+        /**
+         * 
+         * @param message
+         */
         public void send(GamePlayMessage message){
             ICMon.this.mailBox.add(message);
         }
 
+        /**
+         * 
+         * @param areaKey
+         * @param forceBegin
+         * @return
+         */
         public Area setCurrentArea(String areaKey, boolean forceBegin){
             return ICMon.this.setCurrentArea(areaKey, forceBegin);
         }

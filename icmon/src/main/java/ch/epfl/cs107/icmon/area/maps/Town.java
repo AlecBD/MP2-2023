@@ -10,27 +10,16 @@ import ch.epfl.cs107.play.math.Orientation;
 
 public final class Town extends ICMonArea {
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public DiscreteCoordinates getPlayerSpawnPosition(){
         return new DiscreteCoordinates(5, 5);
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public DiscreteCoordinates getBallSpawnPosition(){
         return new DiscreteCoordinates(6, 6);
     }
 
-    /**
-     * ???
-     */
     @Override
     protected void createArea(){
         registerActor(new Background(this));
@@ -40,10 +29,6 @@ public final class Town extends ICMonArea {
         registerActor(new Door(this, new DiscreteCoordinates(20, 16), "arena", new DiscreteCoordinates(4, 2)));
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public String getTitle(){return "town";}
 }

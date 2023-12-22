@@ -5,10 +5,15 @@ public class LogAction implements Action {
     /** ??? */
     private String message;
 
+    /**
+     * 
+     * @param message
+     */
     public LogAction(String message){
         this.message = message;
     }
 
+    @Override
     public void perform(){
         System.out.println(message);
     }

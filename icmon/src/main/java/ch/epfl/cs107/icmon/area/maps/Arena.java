@@ -10,27 +10,16 @@ import ch.epfl.cs107.play.math.Orientation;
 
 public class Arena extends ICMonArea {
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public DiscreteCoordinates getPlayerSpawnPosition(){
         return new DiscreteCoordinates(5, 5);
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public DiscreteCoordinates getBallSpawnPosition(){
         return new DiscreteCoordinates(6, 6);
     }
 
-    /**
-     * ???
-     */
     @Override
     protected void createArea(){
         registerActor(new Background(this));
@@ -39,10 +28,6 @@ public class Arena extends ICMonArea {
         registerActor(new Bulbizarre(this, Orientation.LEFT, new DiscreteCoordinates(6, 6)));
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public String getTitle(){return "arena";}
     

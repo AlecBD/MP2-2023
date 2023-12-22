@@ -93,19 +93,11 @@ public class ICMonbehavior extends AreaBehavior {
             this.type = type;
         }
 
-        /**
-         * 
-         * @return ???
-         */
         @Override
         protected boolean canLeave(Interactable entity) {
             return true;
         }
 
-        /**
-         * 
-         * @return ???
-         */
         @Override
         protected boolean canEnter(Interactable entity) {
             if(entity.takeCellSpace()){
@@ -118,27 +110,16 @@ public class ICMonbehavior extends AreaBehavior {
             return true;
         }
 
-        /**
-         * 
-         * @return ???
-         */
         @Override
         public boolean isCellInteractable() {    
             return true;
         }
 
-        /**
-         * 
-         * @return ???
-         */
         @Override
         public boolean isViewInteractable() {
             return false;
         }
 
-        /**
-         * ???
-         */
         @Override
         public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
             ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

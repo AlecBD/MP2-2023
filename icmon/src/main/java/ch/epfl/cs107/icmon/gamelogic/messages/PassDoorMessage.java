@@ -15,12 +15,19 @@ public class PassDoorMessage extends GamePlayMessage {
     /** ??? */
     private ICMonPlayer player;
 
+    /**
+     * 
+     * @param door
+     * @param state
+     * @param player
+     */
     public PassDoorMessage(Door door, ICMonGameState state, ICMonPlayer player){
         this.door = door;
         this.state = state;
         this.player = player;
     }
 
+    @Override
     public void process(){
         player.leaveArea();
         ICMonArea currentArea = (ICMonArea) state.setCurrentArea(door.getInsideArea(), false);

@@ -28,12 +28,6 @@ public abstract class ICMonArea extends Area {
      */
     public abstract DiscreteCoordinates getBallSpawnPosition();
 
-    /**
-     * ???
-     * @param window (Window): display context. Not null
-     * @param fileSystem (FileSystem): given file system. Not null
-     * @return ???
-     */
     @Override
     public boolean begin(Window window, FileSystem fileSystem){
         if (super.begin(window, fileSystem)) {
@@ -43,10 +37,6 @@ public abstract class ICMonArea extends Area {
         }
         return false;}
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public final float getCameraScaleFactor(){return ICMon.CAMERA_SCALE_FACTOR;}
     

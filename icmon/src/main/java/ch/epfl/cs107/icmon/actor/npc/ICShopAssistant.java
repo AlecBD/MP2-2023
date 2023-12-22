@@ -24,20 +24,11 @@ public class ICShopAssistant extends NPCActor {
         super(owner, orientation, coordinates, "actors/assistant");
     }
 
-    /**
-     * 
-     * @param v
-     * @param isCellInteraction
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);
     }
 
-    /**
-     * 
-     * @param canvas
-     */
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);

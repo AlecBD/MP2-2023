@@ -10,6 +10,10 @@ public class SuspendEventAction implements Action {
     /** ??? */
     private List<ICMonEvent> events = new ArrayList<>();
 
+    /**
+     * 
+     * @param event
+     */
     public SuspendEventAction(ICMonEvent event){
         this.events.add(event);
     }

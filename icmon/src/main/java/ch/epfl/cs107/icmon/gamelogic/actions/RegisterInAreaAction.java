@@ -10,6 +10,11 @@ public class RegisterInAreaAction implements Action {
     /** ?? */
     private Area area;
 
+    /**
+     * 
+     * @param actor
+     * @param area
+     */
     public RegisterInAreaAction(Actor actor, Area area){
         this.actor = actor;
         this.area = area;

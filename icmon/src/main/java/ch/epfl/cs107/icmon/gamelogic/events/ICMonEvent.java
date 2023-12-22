@@ -137,6 +137,10 @@ public abstract class ICMonEvent implements Updatable, ICMonInteractionVisitor {
      */
     public boolean isResumed(){return resumed;}
 
+    /**
+     * 
+     * @return
+     */
     public boolean pausesGame(){
         return false;
     }

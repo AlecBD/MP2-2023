@@ -15,9 +15,6 @@ public class LeaveAreaAction implements Action {
         this.actor = actor;
     }
 
-    /**
-     * ???
-     */
     @Override
     public void perform() {
         actor.leaveArea();

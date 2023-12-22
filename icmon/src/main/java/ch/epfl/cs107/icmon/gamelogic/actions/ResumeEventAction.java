@@ -10,6 +10,10 @@ public class ResumeEventAction implements Action {
     /** ??? */
     private List<ICMonEvent> events = new ArrayList<>();
 
+    /**
+     * 
+     * @param event
+     */
     public ResumeEventAction(ICMonEvent event){
         this.events.add(event);
     }

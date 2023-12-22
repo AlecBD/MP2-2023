@@ -7,10 +7,18 @@ public class PokemonFightEvent extends ICMonEvent {
     /** ??? */
     private ICMonFight fight;
 
+    /**
+     * 
+     * @param fight
+     */
     public PokemonFightEvent(ICMonFight fight){
         this.fight = fight;
     }
 
+    /**
+     * 
+     * @return
+    */
     public ICMonFight getPauseMenu() {
         return fight;
     }

@@ -24,47 +24,27 @@ public class ICBall extends ICMonItem {
         super(owner, coordinates, spriteName);
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
      public boolean isCellInteractable(){
         return false;
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean isViewInteractable() {
         return true;
     }
 
-    /**
-     * ???
-     */
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
-    /**
-     * 
-     * @param v
-     * @param isCellInteraction
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);
 
     }
 
-    /**
-     * ???
-     * @param canvas
-     */
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);

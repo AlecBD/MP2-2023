@@ -24,10 +24,26 @@ public final class Door extends AreaEntity {
     /** ??? */
     private ICMonInteractionVisitor handler;
 
+    /**
+     * Default Door Constructor
+     * 
+     * @param owner
+     * @param principalPosition
+     * @param insideArea
+     * @param arrCds
+     */
     public Door(Area owner, DiscreteCoordinates principalPosition, String insideArea, DiscreteCoordinates arrCds){
         this(owner, insideArea, arrCds, new DiscreteCoordinates[]{principalPosition});
     }
 
+    /**
+     * Door Constructor
+     * 
+     * @param owner
+     * @param insideArea
+     * @param arrCds
+     * @param positions
+     */
     public Door(Area owner, String insideArea, DiscreteCoordinates arrCds, DiscreteCoordinates... positions){
         super(owner, Orientation.UP, positions[0]);
         for(DiscreteCoordinates coordinates : positions){
@@ -60,18 +76,11 @@ public final class Door extends AreaEntity {
     public void draw(Canvas canvas) {
     }
 
-    /**
-     * ??? 
-     * @return ???
-     */
     @Override
     public boolean isViewInteractable() {
         return false;
     }
 
-    /**
-     * ??? 
-     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

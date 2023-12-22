@@ -6,6 +6,10 @@ public class ResumeGameAction implements Action {
     /** ??? */
     private ICMon game;
 
+    /**
+     * 
+     * @param game
+     */
     public ResumeGameAction(ICMon game){
         this.game = game;
     }

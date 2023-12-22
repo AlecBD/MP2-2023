@@ -51,28 +51,17 @@ public abstract class Pokemon extends ICMonActor implements  ICMonFightableActor
         hp = maxHp;
     }
 
-    /**
-     * 
-     * @param canvas
-     */
     @Override
     public void draw(Canvas canvas){
         new RPGSprite("pokemon/" + name, 1, 1, this).draw(canvas);
 
     }
 
-    /**
-     * ???
-     */
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
-    /**
-     * ???
-     * @return ???
-     */
     @Override
     public boolean takeCellSpace() {
         return false;
@@ -91,6 +80,11 @@ public abstract class Pokemon extends ICMonActor implements  ICMonFightableActor
         }
     }
 
+    /**
+     * ???
+     * 
+     * @return ???
+     */
     public PokemonProperties properties(){
         return new PokemonProperties();
     }
@@ -123,7 +117,5 @@ public abstract class Pokemon extends ICMonActor implements  ICMonFightableActor
         public List<ICMonFightAction> actions() {
             return Pokemon.this.actions;
         }
-
     }
-
 }

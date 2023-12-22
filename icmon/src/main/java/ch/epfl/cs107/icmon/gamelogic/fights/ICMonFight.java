@@ -34,6 +34,11 @@ public class ICMonFight extends PauseMenu {
     /** ??? */
     private Keyboard keyboard;
 
+    /**
+     * 
+     * @param player
+     * @param opponent
+     */
     public ICMonFight(Pokemon player, Pokemon opponent){
         this.player = player;
         this.opponent = opponent;
@@ -42,10 +47,6 @@ public class ICMonFight extends PauseMenu {
         keyboard = player.getICMonOwnerArea().getKeyboard();
     }
 
-    /**
-     * ???
-     * @param deltaTime
-     */
     @Override
     public void update(float deltaTime){
         super.update(deltaTime);
@@ -114,10 +115,6 @@ public class ICMonFight extends PauseMenu {
         return running;
     }
 
-    /**
-     * ???
-     * @param c (Canvas)
-     */
     @Override
     public void drawMenu(Canvas c) {
         if(state == FightState.ACTIONSELECTION){
@@ -137,15 +134,28 @@ public class ICMonFight extends PauseMenu {
         final int type;
         String text;
 
+        /**
+         * 
+         * @param type
+         * @param text
+         */
         private FightState(int type, String text){
             this.type = type;
             this.text = text;
         }
 
+        /**
+         * 
+         * @param text
+         */
         private void setText(String text) {
             this.text = text;
         }
 
+        /**
+         * 
+         * @return
+         */
         private String getText() {
             return text;
         }

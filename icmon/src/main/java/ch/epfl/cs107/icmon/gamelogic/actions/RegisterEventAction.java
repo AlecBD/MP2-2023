@@ -10,6 +10,11 @@ public class RegisterEventAction implements Action {
     /** ??? */
     private ICMonEvent event;
 
+    /**
+     * 
+     * @param handler
+     * @param event
+     */
     public RegisterEventAction(ICMonEventManager handler, ICMonEvent event){
         this.handler = handler;
         this.event = event;
