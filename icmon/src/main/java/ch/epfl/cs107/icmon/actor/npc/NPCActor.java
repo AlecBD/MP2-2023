@@ -17,7 +17,7 @@ public abstract class NPCActor extends ICMonActor {
     protected Sprite sprite;
 
     /**
-     * NPCActor Constructor. spriteName is specific
+     * NPCActor Constructor
      * 
      * @param owner
      * @param orientation

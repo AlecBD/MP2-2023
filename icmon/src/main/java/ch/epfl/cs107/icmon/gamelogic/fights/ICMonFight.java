@@ -39,7 +39,7 @@ public class ICMonFight extends PauseMenu {
         this.opponent = opponent;
 
         arena = new ICMonFightArenaGraphics(CAMERA_SCALE_FACTOR , player.properties(), opponent.properties());
-        keyboard = player.getOwnerArea().getKeyboard();
+        keyboard = player.getICMonOwnerArea().getKeyboard();
     }
 
     /**

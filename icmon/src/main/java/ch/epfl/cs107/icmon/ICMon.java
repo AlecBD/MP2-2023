@@ -12,7 +12,7 @@ import ch.epfl.cs107.icmon.area.maps.Arena;
 import ch.epfl.cs107.icmon.area.maps.Lab;
 import ch.epfl.cs107.icmon.area.maps.Town;
 import ch.epfl.cs107.icmon.gamelogic.actions.LogAction;
-import ch.epfl.cs107.icmon.gamelogic.actions.PauseGameAction;
+//import ch.epfl.cs107.icmon.gamelogic.actions.PauseGameAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.RegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.RegisterInAreaAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.ResumeEventAction;
@@ -122,7 +122,8 @@ public class ICMon extends AreaGame {
         if(mailBox.size() > 0) {
             GamePlayMessage message = mailBox.get(0);
             if(message instanceof SuspendWithEvent){
-                ((SuspendWithEvent)message).getEvent().onStart(new PauseGameAction(this, ((SuspendWithEvent)message).getEvent().getPauseMenu()));
+                setPauseMenu(((SuspendWithEvent)message).getEvent().getPauseMenu());
+                requestPause();
                 ((SuspendWithEvent)message).getEvent().onStart(new RegisterEventAction(EVENT_MANAGER, ((SuspendWithEvent)message).getEvent()));
                 ((SuspendWithEvent)message).getEvent().onComplete(new ResumeGameAction(this));
                 ((SuspendWithEvent)message).getEvent().onComplete(new UnRegisterEventAction(EVENT_MANAGER, ((SuspendWithEvent)message).getEvent()));
@@ -176,6 +177,10 @@ public class ICMon extends AreaGame {
         begin(window, fileSystem);
 
     }
+
+    /* public PauseMenu setPauseMenu(PauseMenu menu){
+        return super.setPauseMenu(menu);
+    } */
 
     public class ICMonGameState {
 

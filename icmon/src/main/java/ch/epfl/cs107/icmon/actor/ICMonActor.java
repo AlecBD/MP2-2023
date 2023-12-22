@@ -87,4 +87,8 @@ public abstract class ICMonActor extends MovableAreaEntity {
     public void openDialog(String text){
         dialog = new Dialog(text);
     }
+
+    public Area getICMonOwnerArea(){
+        return super.getOwnerArea();
+    }
 }

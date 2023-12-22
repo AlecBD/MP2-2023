@@ -13,3 +13,13 @@ changed visibility from window in PauseMenu to protected to use it in ICMonFight
 
 changed visibility from getOwnerArea() in AreaEntity to public to use it in ICMonFight because getKeyboard()
 launched error
+
+
+1. les éventuelles modifications personnelles que vous avez apportées à l'architecture proposée en les justifiant;
+
+
+2. les classes/interfaces importantes ajoutées et comment elles s'insèrent dans l'architecture;
+
+
+3. le comportement que vous attribuez à chacun des composants introduits (si le composant n'est pas demandé ou s'il
+    l'est mais que son comportement est une petite variante de celui suggéré dans l'énoncé).

@@ -44,7 +44,7 @@ public abstract class AreaEntity extends Entity implements Interactable {
      * Getter for the owner area
      * @return (Area)
      */
-    public Area getOwnerArea() {
+    protected Area getOwnerArea() {
         return ownerArea;
     }
 

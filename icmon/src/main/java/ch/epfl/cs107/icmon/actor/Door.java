@@ -60,20 +60,35 @@ public final class Door extends AreaEntity {
     public void draw(Canvas canvas) {
     }
 
+    /**
+     * ??? 
+     * @return ???
+     */
     @Override
     public boolean isViewInteractable() {
         return false;
     }
 
+    /**
+     * ??? 
+     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);
     }
 
+    /***
+     * 
+     * @return ???
+     */
     public String getInsideArea() {
         return insideArea;
     }
 
+    /**
+     * 
+     * @return ???
+     */
     public DiscreteCoordinates getArrivalCoordinates() {
         return arrivalCoordinates;
     }
