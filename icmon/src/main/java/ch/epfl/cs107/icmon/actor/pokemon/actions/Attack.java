@@ -12,8 +12,9 @@ public class Attack implements ICMonFightAction, Action {
     }
 
     @Override
-    public boolean doAction(Pokemon target) {
-        return false;
+    public boolean doAction(Pokemon active, Pokemon target) {
+        target.receiveDamage(active.properties().damage());
+        return true;
     }
 
     @Override

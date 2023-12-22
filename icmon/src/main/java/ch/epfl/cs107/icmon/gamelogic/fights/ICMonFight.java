@@ -2,6 +2,7 @@ package ch.epfl.cs107.icmon.gamelogic.fights;
 
 import ch.epfl.cs107.icmon.actor.pokemon.Pokemon;
 import ch.epfl.cs107.icmon.actor.pokemon.actions.Attack;
+import ch.epfl.cs107.icmon.graphics.ICMonFightActionSelectionGraphics;
 import ch.epfl.cs107.icmon.graphics.ICMonFightArenaGraphics;
 import ch.epfl.cs107.icmon.graphics.ICMonFightTextGraphics;
 import ch.epfl.cs107.play.engine.PauseMenu;
@@ -28,13 +29,17 @@ public class ICMonFight extends PauseMenu {
     private boolean running = true;
     /** ??? */
     private ICMonFightAction action;
+    /** ??? */
+    private ICMonFightActionSelectionGraphics selectionMenu;
+    /** ??? */
+    private Keyboard keyboard;
 
     public ICMonFight(Pokemon player, Pokemon opponent){
         this.player = player;
         this.opponent = opponent;
 
         arena = new ICMonFightArenaGraphics(CAMERA_SCALE_FACTOR , player.properties(), opponent.properties());
-        
+        keyboard = player.getOwnerArea().getKeyboard();
     }
 
     /**
@@ -44,17 +49,21 @@ public class ICMonFight extends PauseMenu {
     @Override
     public void update(float deltaTime){
         super.update(deltaTime);
-        Button space = player.getOwnerArea().getKeyboard().get(Keyboard.SPACE);
+        selectionMenu = new ICMonFightActionSelectionGraphics(CAMERA_SCALE_FACTOR, keyboard, player.properties().actions());
+        Button space = keyboard.get(Keyboard.SPACE);
         switch(state){
             case INTRODUCTION:
                 if(space.isDown()) state = FightState.ACTIONSELECTION;
                 break;
             case ACTIONSELECTION:
-                action = player.properties().actions().get(0);
-                state = FightState.ACTIONEXECUTION;
+                selectionMenu.update(deltaTime);
+                if(selectionMenu.choice() != null){
+                    action = selectionMenu.choice();
+                    state = FightState.ACTIONEXECUTION;
+                }
                 break;
             case ACTIONEXECUTION:
-                if(action.doAction(opponent)){
+                if(action.doAction(player, opponent)){
                     if(!opponent.properties().isAlive()){
                         state = FightState.CONCLUSION;
                         state.setText("The player has won the fight");
@@ -71,7 +80,7 @@ public class ICMonFight extends PauseMenu {
             case OPPONENTACTION:
                 for(ICMonFightAction action : opponent.properties().actions()){
                     if(action instanceof Attack){
-                        if(action.doAction(player)){
+                        if(action.doAction(opponent, player)){
                             if(!player.properties().isAlive()){
                                 state = FightState.CONCLUSION;
                                 state.setText("The opponent has won the fight");
@@ -111,7 +120,10 @@ public class ICMonFight extends PauseMenu {
      */
     @Override
     public void drawMenu(Canvas c) {
-        arena.setInteractionGraphics(new ICMonFightTextGraphics(CAMERA_SCALE_FACTOR, text));
+        if(state == FightState.ACTIONSELECTION){
+            arena.setInteractionGraphics(selectionMenu);
+        }
+        else arena.setInteractionGraphics(new ICMonFightTextGraphics(CAMERA_SCALE_FACTOR, text));
         arena.draw(c);
     }
 
