@@ -8,10 +8,22 @@ import ch.epfl.cs107.play.math.Orientation;
 
 public class Nidoqueen extends Pokemon {
 
+    /**
+     * Nidoqueen Constructor
+     * 
+     * @param owner
+     * @param orientation
+     * @param coordinates
+     */
     public Nidoqueen(Area owner, Orientation orientation, DiscreteCoordinates coordinates){
         super(owner, orientation, coordinates, "nidoqueen", 1, 10);
     }
 
+    /**
+     * 
+     * @param v
+     * @param isCellInteraction
+     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

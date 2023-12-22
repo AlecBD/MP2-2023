@@ -4,8 +4,13 @@ import ch.epfl.cs107.icmon.ICMon.ICMonGameState;
 import ch.epfl.cs107.icmon.actor.handler.ICMonInteractionVisitor;
 import ch.epfl.cs107.icmon.actor.items.ICBall;
 import ch.epfl.cs107.icmon.actor.npc.ICShopAssistant;
+import ch.epfl.cs107.icmon.actor.pokemon.Bulbizarre;
+import ch.epfl.cs107.icmon.actor.pokemon.Latios;
+import ch.epfl.cs107.icmon.actor.pokemon.Nidoqueen;
+import ch.epfl.cs107.icmon.actor.pokemon.Pokemon;
 import ch.epfl.cs107.icmon.area.ICMonbehavior.AllowedWalkingType;
 import ch.epfl.cs107.icmon.area.ICMonbehavior.ICMonCell;
+import ch.epfl.cs107.icmon.gamelogic.actions.RegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.messages.PassDoorMessage;
 import ch.epfl.cs107.play.areagame.actor.Interactable;
 import ch.epfl.cs107.play.areagame.actor.Interactor;
@@ -25,7 +30,7 @@ import java.util.List;
 /**
  * ???
  */
-public final class ICMonPlayer extends ICMonActor implements Interactor{
+public final class ICMonPlayer extends ICMonActor implements Interactor, ICMonFightableActor {
 
     /** ??? */
     private final static int ANIMATION_DURATION = 8;
@@ -34,9 +39,8 @@ public final class ICMonPlayer extends ICMonActor implements Interactor{
     private static OrientedAnimation moveAnimation;
     /** ??? */
     private static String spriteName;
-
+    /** ??? */
     private AllowedWalkingType walkingType = AllowedWalkingType.FEET;
-
     /** ??? */
     private boolean moving = false;
     /** ??? */
@@ -47,6 +51,10 @@ public final class ICMonPlayer extends ICMonActor implements Interactor{
     private final ICMonGameState state;
     /** ??? */
     private boolean inDialog = false;
+    /** ??? */
+    private ArrayList<Pokemon> pokemon = new ArrayList<>();
+    /** ??? */
+    private boolean isFighting;
 
     /**
      * ???
@@ -61,6 +69,9 @@ public final class ICMonPlayer extends ICMonActor implements Interactor{
         this.spriteName = spriteName;
         moveAnimation = new OrientedAnimation(spriteName , ANIMATION_DURATION/2, orientation , this);
         resetMotion();
+        addPokemon(new Bulbizarre(owner, orientation, coordinates));
+        addPokemon(new Latios(owner, orientation, coordinates));
+        addPokemon(new Nidoqueen(owner, orientation, coordinates));
     }
 
     /**
@@ -232,8 +243,16 @@ public final class ICMonPlayer extends ICMonActor implements Interactor{
         inDialog= false;
     }
 
+    /**
+     * 
+     * @param ball
+     */
     public void addBall(ICBall ball){
         balls.add(ball);
+    }
+
+    public void addPokemon(Pokemon pokemon){
+        this.pokemon.add(pokemon);
     }
         
 
@@ -290,24 +309,30 @@ public final class ICMonPlayer extends ICMonActor implements Interactor{
             ICMonPlayer.this.state.acceptInteraction(assistant, isCellInteraction);
         }
 
+        /**
+         * ???
+         * @param door ???
+         * @param isCellInteraction ???
+         */
         @Override
         public void interactWith(Door door, boolean isCellInteraction) {
             if (isCellInteraction){
-                PassDoorMessage message = new PassDoorMessage(door, state);
+                PassDoorMessage message = new PassDoorMessage(door, state, ICMonPlayer.this);
                 state.send(message);
             }
         }
 
-        /* @Override
+        /**
+         * ???
+         * @param pokemon ???
+         * @param isCellInteraction ???
+         */
+        @Override
         public void interactWith(Pokemon pokemon, boolean isCellInteraction) {
-            if (isCellInteraction){
-                PokemonFightEvent event = new PokemonFightEvent(state.getWindow());
-                event.onComplete(new LeaveAreaAction(pokemon));
-                pokemon.fight(pokemon);
-                SuspendWithEvent message = new SuspendWithEvent(event);
-                state.send(message);
+            if (isCellInteraction && !ICMonPlayer.this.isFighting){
+                fight(ICMonPlayer.this.pokemon.get(0), pokemon, state, state.getWindow());
             }
-        } */
+        }
 
 
 

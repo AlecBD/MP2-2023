@@ -43,6 +43,9 @@ public abstract class ICMonEvent implements Updatable, ICMonInteractionVisitor {
         if(started && !ended){
             executePart(endActions);
             ended = true;
+            started = false;
+            paused = false;
+            resumed = false;
         }
     }
 
@@ -64,6 +67,7 @@ public abstract class ICMonEvent implements Updatable, ICMonInteractionVisitor {
         if(!ended && paused && started){
             executePart(resumeActions);
             resumed = true;
+            paused = false;
         }
     }
 

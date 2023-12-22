@@ -1,0 +1,27 @@
+1. Comment lancer le programme
+
+2. Contrôles
+
+    - intéragir à distance:  "L"
+    - redémarrer le jeu:     "R"
+    - uptade dialog;         "SPACE"
+    - bouger à gauche:       "LEFT"
+    - bouger à droite:       "RIGHT"
+    - bouger en haut:        "UP"
+    - bouger en bas:         "DOWN"
+
+3. quel est le comportement que vous attribuez à chacun des composants introduits 
+    (si le composant n'est pas demandé ou s'il l'est mais que son comportement est une petite variante de 
+    celui suggéré dans l'énoncé);
+
+    - ligne 40 dans ICMonPlayer.java donne type de movement du player et a AllowedWalkingType.FEET comme valeur par défaut
+    - ipour les méthodes start, complete, suspend, resume dans ICMonEvent j'ai utilisé la négation comme condition
+    - méthode executePart en ICMonEvent pour une meilleure encapsulaation
+    - méthode setCurrentArea() en ICMonGameState pour l'utiliser dans PassDoorMessage pour changer d'aires
+
+4. quels sont les éventuels niveaux mis en oeuvre et que faire pour réaliser le scénario de jeu voulu. 
+    Nous devons pouvoir tester votre jeu sans avoir à lire votre code (ou deviner les règles ou les 
+    niveaux mis en place ;-))
+
+    J'ai réalisé jusqu'à la tâche 4.2.1-2 et ça lance une erreure quand on essaye d'intéragir avec le pokemon 
+    car j'ai pas réussi la tâche 4.2.2-3

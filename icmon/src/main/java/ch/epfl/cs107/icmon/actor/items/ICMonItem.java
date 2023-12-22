@@ -9,15 +9,15 @@ import ch.epfl.cs107.play.math.Orientation;
 
 public abstract class ICMonItem extends CollectableAreaEntity {
 
-    /** ??? */
+    //Area where the ICMonItem will exist
     protected Area owner;
-    /** ??? */
+
     private DiscreteCoordinates position;
-    /** ??? */
+    //Reference for image
     protected final Sprite sprite;
 
     /**
-     * Default ICMonItem Constructor
+     * ICMonItem Constructor with default value for orientation
      * 
      * @param owner ???
      * @param position ???
@@ -29,7 +29,7 @@ public abstract class ICMonItem extends CollectableAreaEntity {
     }
 
     /**
-     * ICMonItem Constructor
+     * ICMonItem Constructor with orientation specified 
      * 
      * @param owner ???
      * @param orientation ???
@@ -45,7 +45,7 @@ public abstract class ICMonItem extends CollectableAreaEntity {
     }
 
     /**
-     * ???
+     * non-transversable
      * @return ???
      */
     @Override

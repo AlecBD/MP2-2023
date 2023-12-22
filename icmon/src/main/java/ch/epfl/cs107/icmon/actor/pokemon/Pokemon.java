@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.window.Canvas;
  *
  * @author Hamza REMMAL (hamza.remmal@epfl.ch)
  */
-public abstract class Pokemon extends ICMonActor implements ICMonFightableActor {
+public abstract class Pokemon extends ICMonActor implements  ICMonFightableActor {
 
     /** ??? */
     private String name;
@@ -29,6 +29,16 @@ public abstract class Pokemon extends ICMonActor implements ICMonFightableActor 
     /** ??? */
     private boolean alive = true;
 
+    /**
+     * Pokemon Constructor
+     * 
+     * @param owner
+     * @param orientation
+     * @param coordinates
+     * @param name
+     * @param damage
+     * @param maxHp
+     */
     public Pokemon(Area owner, Orientation orientation, DiscreteCoordinates coordinates, String name, int damage, int maxHp){
         super(owner, orientation, coordinates);
         this.name = name;
@@ -37,6 +47,11 @@ public abstract class Pokemon extends ICMonActor implements ICMonFightableActor 
         hp = maxHp;
     }
 
+    /**
+     * 
+     * @param canvas
+     */
+    @Override
     public void draw(Canvas canvas){
         new RPGSprite("pokemon/" + name, 1, 1, this).draw(canvas);
 
@@ -59,6 +74,11 @@ public abstract class Pokemon extends ICMonActor implements ICMonFightableActor 
         return false;
     }
 
+    /**
+     * loses hp as receives damage
+     * 
+     * @param damage
+     */
     public void receiveDamage(int damage){
         hp -= damage;
         if(hp <= 0){
@@ -67,25 +87,29 @@ public abstract class Pokemon extends ICMonActor implements ICMonFightableActor 
         }
     }
 
+    public PokemonProperties properties(){
+        return new PokemonProperties();
+    }
+
     /**
      * @author Hamza REMMAL (hamza.remmal@epfl.ch)
      */
     public final class PokemonProperties {
 
         public String name(){
-            return null;
+            return Pokemon.this.name;
         }
 
         public float hp(){
-            return 0f;
+            return Pokemon.this.hp;
         }
 
         public float maxHp(){
-            return 0f;
+            return Pokemon.this.maxHp;
         }
 
         public int damage(){
-            return 0;
+            return Pokemon.this.damage;
         }
 
     }

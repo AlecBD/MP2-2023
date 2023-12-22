@@ -48,11 +48,21 @@ public class ICMonbehavior extends AreaBehavior {
         final int type;
         final AllowedWalkingType walkingType;
 
+        /**
+         * 
+         * @param type
+         * @param walkingType
+         */
         ICMonCellType(int type, AllowedWalkingType walkingType){
             this.type = type;
             this.walkingType = walkingType;
         }
 
+        /**
+         * 
+         * @param type
+         * @return
+         */
         public static ICMonCellType toType(int type) {
             for (ICMonCellType ict : ICMonCellType.values()) {
                 if (ict.type == type)
@@ -83,11 +93,19 @@ public class ICMonbehavior extends AreaBehavior {
             this.type = type;
         }
 
+        /**
+         * 
+         * @return ???
+         */
         @Override
         protected boolean canLeave(Interactable entity) {
             return true;
         }
 
+        /**
+         * 
+         * @return ???
+         */
         @Override
         protected boolean canEnter(Interactable entity) {
             if(entity.takeCellSpace()){
@@ -100,32 +118,27 @@ public class ICMonbehavior extends AreaBehavior {
             return true;
         }
 
+        /**
+         * 
+         * @return ???
+         */
         @Override
         public boolean isCellInteractable() {    
             return true;
         }
 
         /**
-         * returns true if player can't stand on the cell
          * 
-         * @param entity
          * @return ???
-         /
-        public boolean takeCellSpace(Interactable entity){
-            if(entity instanceof ICMonPlayer){
-                if(((ICMonPlayer)entity).getWalkingtype() != type.walkingType && type.walkingType != AllowedWalkingType.ALL){
-                    return true;
-                }
-            }
-            
-            return super.takeCellSpace();
-        } */
-
+         */
         @Override
         public boolean isViewInteractable() {
             return false;
         }
 
+        /**
+         * ???
+         */
         @Override
         public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
             ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);

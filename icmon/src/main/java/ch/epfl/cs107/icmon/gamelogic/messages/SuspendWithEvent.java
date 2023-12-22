@@ -6,7 +6,9 @@ import ch.epfl.cs107.icmon.gamelogic.events.PokemonFightEvent;
 public class SuspendWithEvent extends GamePlayMessage {
 
     /** ??? */
-    private final PokemonFightEvent event;
+    private PokemonFightEvent event;
+    /** ??? */
+    private final static String text = "suspension des événements en cours à cause d'un événement combat";
 
     public SuspendWithEvent(PokemonFightEvent event){
         this.event = event;
@@ -16,13 +18,10 @@ public class SuspendWithEvent extends GamePlayMessage {
         return event;
     }
 
-    public boolean hasPauseMenu(){
-        return event.hasPauseMenu();
-    }
-
     @Override
-    public void process(ICMonActor actor) {
-        System.out.println("suspension des événements en cours à cause d'un événement combat");
+    public void process() {
+        System.out.println(text);
+        event.start();
     }
     
 }

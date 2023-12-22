@@ -4,6 +4,6 @@ import ch.epfl.cs107.icmon.actor.ICMonActor;
 
 public abstract class GamePlayMessage {
 
-    public abstract void process(ICMonActor actor);
+    public abstract void process();
     
 }

@@ -72,7 +72,7 @@ abstract public class AreaGame implements Game, PauseMenu.Pausable {
      * @param menu (PauseMenu) : the new pause menu, not null
      * @return (PauseMenu): the new pause menu, not null
      */
-    protected final PauseMenu setPauseMenu(PauseMenu menu){
+    public final PauseMenu setPauseMenu(PauseMenu menu){
         this.menu = menu;
         this.menu.begin(window, fileSystem);
         this.menu.setOwner(this);

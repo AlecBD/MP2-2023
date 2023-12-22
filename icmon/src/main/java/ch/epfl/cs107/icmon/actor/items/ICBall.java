@@ -16,9 +16,9 @@ public class ICBall extends ICMonItem {
 
     /**
      * ???
-     * @param owner ???
-     * @param coordinates ???
-     * @param spriteName ???
+     * @param owner (Area) where the Ball lives
+     * @param coordinates (DiscreteCoordinates) position of the Ball in the Area
+     * @param spriteName (String) identifies image to use for the Ball
      */
     public ICBall(Area owner, DiscreteCoordinates coordinates, String spriteName){
         super(owner, coordinates, spriteName);
@@ -42,27 +42,46 @@ public class ICBall extends ICMonItem {
         return true;
     }
 
+    /**
+     * ???
+     */
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
 
+    /**
+     * 
+     * @param v
+     * @param isCellInteraction
+     */
     @Override
     public void acceptInteraction(AreaInteractionVisitor v, boolean isCellInteraction) {
         ((ICMonInteractionVisitor) v).interactWith(this , isCellInteraction);
 
     }
 
+    /**
+     * ???
+     * @param canvas
+     */
     @Override
     public void draw(Canvas canvas) {
         sprite.draw(canvas);
     }
 
+    /**
+     * Removes Ball from the Area
+     */
     public void getCollected(){
         owner.unregisterActor(this);
         collected = true;
     }
 
+    /**
+     * ???
+     * @return ???
+     */
     public boolean isCollected(){return collected;}
     
 }

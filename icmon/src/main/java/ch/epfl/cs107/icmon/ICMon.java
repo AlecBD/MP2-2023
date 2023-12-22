@@ -12,9 +12,13 @@ import ch.epfl.cs107.icmon.area.maps.Arena;
 import ch.epfl.cs107.icmon.area.maps.Lab;
 import ch.epfl.cs107.icmon.area.maps.Town;
 import ch.epfl.cs107.icmon.gamelogic.actions.LogAction;
+import ch.epfl.cs107.icmon.gamelogic.actions.PauseGameAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.RegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.RegisterInAreaAction;
+import ch.epfl.cs107.icmon.gamelogic.actions.ResumeEventAction;
+import ch.epfl.cs107.icmon.gamelogic.actions.ResumeGameAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.StartEventAction;
+import ch.epfl.cs107.icmon.gamelogic.actions.SuspendEventAction;
 import ch.epfl.cs107.icmon.gamelogic.actions.UnRegisterEventAction;
 import ch.epfl.cs107.icmon.gamelogic.events.CollectItemEvent;
 import ch.epfl.cs107.icmon.gamelogic.events.EndOfGameEvent;
@@ -25,6 +29,7 @@ import ch.epfl.cs107.icmon.gamelogic.messages.SuspendWithEvent;
 import ch.epfl.cs107.play.areagame.AreaGame;
 import ch.epfl.cs107.play.areagame.actor.Interactable;
 import ch.epfl.cs107.play.areagame.area.Area;
+import ch.epfl.cs107.play.engine.PauseMenu;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Orientation;
@@ -34,7 +39,7 @@ import ch.epfl.cs107.play.window.Window;
 public class ICMon extends AreaGame {
 
     /** ??? */
-    public final static float CAMERA_SCALE_FACTOR = 20.f;
+    public final static float CAMERA_SCALE_FACTOR = 13.f;
     /** ??? */
     private final String[] areas = {"town","town"};
     /** ??? */
@@ -111,28 +116,22 @@ public class ICMon extends AreaGame {
 
         for(ICMonEvent event : events){
             event.update(deltaTime);
-
-            if(event instanceof PokemonFightEvent){
-                if(event.isCompleted()){
-                    requestResume();
-                } else if(event.isStarted()){
-                    setPauseMenu(((PokemonFightEvent) event).getFight());
-                    requestPause();
-                }
-            }
         }
 
         if(mailBox.size() > 0) {
             GamePlayMessage message = mailBox.get(0);
             if(message instanceof SuspendWithEvent){
-                if(((SuspendWithEvent)message).hasPauseMenu()){
-                    PokemonFightEvent event = ((SuspendWithEvent)message).getEvent();
-                    events.add(event);
-                    event.onStart(new RegisterEventAction(EVENT_MANAGER, event));
-                    event.onComplete(new UnRegisterEventAction(EVENT_MANAGER, event));
+                ((SuspendWithEvent)message).getEvent().onStart(new PauseGameAction(this, ((SuspendWithEvent)message).getEvent().getPauseMenu()));
+                ((SuspendWithEvent)message).getEvent().onStart(new RegisterEventAction(EVENT_MANAGER, ((SuspendWithEvent)message).getEvent()));
+                ((SuspendWithEvent)message).getEvent().onComplete(new ResumeGameAction(this));
+                ((SuspendWithEvent)message).getEvent().onComplete(new UnRegisterEventAction(EVENT_MANAGER, ((SuspendWithEvent)message).getEvent()));
+                for(ICMonEvent event : activeEvents){
+                    ((SuspendWithEvent)message).getEvent().onStart(new SuspendEventAction(event));
+                    ((SuspendWithEvent)message).getEvent().onComplete(new ResumeEventAction(event));
                 }
+                
             }
-            mailBox.get(0).process(player);
+            message.process();
             mailBox.clear();
         }
     }
@@ -189,6 +188,18 @@ public class ICMon extends AreaGame {
 
         public Area setCurrentArea(String areaKey, boolean forceBegin){
             return ICMon.this.setCurrentArea(areaKey, forceBegin);
+        }
+
+        public Window getWindow(){
+            return ICMon.this.getWindow();
+        }
+
+        /**
+         * ???
+         * @param event
+         */
+        public void addEvent(ICMonEvent event){
+            ICMon.this.events.add(event);
         }
     }
 
